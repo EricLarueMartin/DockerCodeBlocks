@@ -1,5 +1,5 @@
 # Need to run with 
-# docker run --cap-add=SYS_PTRACE --security-opt seccomp=unconfined
+# docker run -it --rm --cap-add=SYS_PTRACE --security-opt seccomp=unconfined  --mount source=myvol,target=/home elmartin/codeblocks
 # or debugger won't work.
 
 FROM centos:7
@@ -21,3 +21,7 @@ RUN yum -y install codeblocks
 # should allow GUI to work with an appropriate X server
 # Xming (Windows, possibly through XLaunch) or XQuartz (MacOS)
 ENV DISPLAY=host.docker.internal:0
+
+WORKDIR /home
+
+ENTRYPOINT ["codeblocks"]
